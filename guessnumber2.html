@@ -1,0 +1,23 @@
+<script>
+//Example of locking down a variable
+//in using local scope
+
+var generatedNumber = Math.floor(Math.random() * 10 + 1);
+
+function generateRandomNumber()
+{
+  var generatedNumber = Math.floor(Math.random() * 10 + 1);
+  return generatedNumber; //returns a single value
+}
+
+alert("The global value is " + generatedNumber);
+
+
+//this is what was hiding locally inside the function
+alert(generateRandomNumber()); 
+
+document.write("The local variable is " + generateRandomNumber());
+
+var mylocalvalue = generateRandomNumber(); //assignment
+alert("My local value is " + mylocalvalue);
+</script>
