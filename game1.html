@@ -1,0 +1,27 @@
+<script>
+//http://www.w3schools.com/js/js_object_definition.asp
+
+function Weapon(weaponname, weapontype, dietype, adj) {
+  this.weaponName = weaponname;
+  this.weaponType = weapontype;
+  this.dietype    = dietype;
+  this.adjustment = adj;
+}
+
+function Character(fullname, age, eye) {
+    this.fullName = fullname;
+    this.age = age;
+    this.eyeColor = eye;
+    this.hp = 3;
+    this.attack = function(warcry){alert(warcry);};
+}
+var player1 = new Character("Conan", 50, "brown");
+player1.attack("hoooo!");
+
+var weapon1 = new Weapon("BloodyHell","sword",6,1);
+
+
+player1.hp = player1.hp - weapon1.dietype; //randomize later
+
+alert("Lion-O has just " + player1.hp + "hp left");
+</script>

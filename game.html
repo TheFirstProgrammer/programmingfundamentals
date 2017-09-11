@@ -1,0 +1,163 @@
+<script>
+//Create class/objects using constructors
+function getStat() //All stats can have a value between 3-18
+{
+  var die1 = Math.floor((Math.random() * 6) + 1);
+  var die2 = Math.floor((Math.random() * 6) + 1);
+  var die3 = Math.floor((Math.random() * 6) + 1);
+
+  return die1 + die2 + die3;
+}
+
+function getHP(profession) //Generate hit points depending on profession
+{ 
+  var hp = 0; //initialize the variable so program immediately knows data type
+
+  if(profession=="warrior")
+  {
+    hp = Math.floor((Math.random() * 10) + 1) + 5;
+  } 
+  else //for now our only alt choice is a wizard 
+  {
+    hp = Math.floor((Math.random() * 4) + 1) + 2;
+  }
+
+  return hp;
+}
+
+function getWeapon(weapon) //Allow player to pick a weapon + bonus   
+{
+  if(weapon=="sword")
+  {
+    return 6;
+  }
+  if(weapon=="axe")
+  {
+    return 8;
+  }
+  if(weapon=="shield")
+  {
+   return 4;
+  }
+  if(weapon=="flail")
+  {
+    return 10;
+  }
+  else 
+  {
+    return Math.floor((Math.random() * 10) + 1);
+  }
+}
+
+function getPThit(dexterity)
+{
+  if(dexterity>11) 
+  {
+    return 20; //bonus
+  }
+  else
+  {
+    return 0; //no bonus
+  }
+}
+
+function Character(profession,fullname,age,eyecolor,haircolor,height,weight,race,gender,skincolor,weapon)
+{
+  this.fullName  = fullname;
+  this.age       = age;
+  this.eyeColor  = eyecolor;
+  this.hairColor = haircolor; 
+  this.height    = height; //use inches
+  this.weight    = weight; //use pounds
+  this.race      = race;
+  this.gender    = gender;
+  this.skincolor = skincolor;
+  this.profession = profession; //notice I purposely put this out of order
+  //Below are the non-customizable properties.  We'll just randomly generate these values
+  this.Dexterity    = getStat();
+  this.Constitution = getStat();
+  this.Strength     = getStat();
+  this.Charisma     = getStat();
+  this.Wisdom       = getStat();
+  this.Intelligence = getStat();
+  this.Comeliness   = getStat();
+  this.IsQualified  = true; //a check to make sure stats allow character to be qualified
+  this.Hp           = getHP(this.profession);  
+  this.Damage       = getWeapon(weapon); 
+  this.Weapon       = weapon;  
+  this.PThit        = getPThit(this.Dexterity);            
+
+  if (this.Strength < 11 && this.profession=="warrior") 
+  {
+    this.IsQualified = false;
+  }
+
+  if (this.Constitution < 9 && this.profession=="warrior")
+  {
+    this.IsQualified = false;
+  }
+
+  if(this.Intelligence < 14 && this.profession=="wizard")
+  {
+    this.IsQualified = false;
+  }
+
+  if(this.Strength < 9 && this.profession=="wizard")
+  {
+    this.IsQualified = false;
+  }
+}
+
+//Don is ashamed of this approach, but doesn't want to introduce new material
+ alert("Create player1");
+ var profession = prompt("What is your profession?","");
+ var fullname   = prompt("What is your name?","");
+ var age        = prompt("What is your age?","");
+ var eyecolor   = prompt("What is your eye color?","");
+ var haircolor  = prompt("What is your hair color?","");
+ var height     = prompt("What is your height in inches?","");
+ var weight     = prompt("What is your weight in pounds?","");
+ var race       = prompt("What is your race?","");
+ var gender     = prompt("What is your gender?","");
+ var skincolor  = prompt("What is your skin color?","");
+ var weapon     = prompt("What is your weapon of choice?",""); 
+
+var player1 = new Character(profession,fullname,age,eyecolor,haircolor,height,weight,race,gender,skincolor,weapon); 
+
+ alert("Create player2");
+ var profession = prompt("What is your profession?","");
+ var fullname   = prompt("What is your name?","");
+ var age        = prompt("What is your age?","");
+ var eyecolor   = prompt("What is your eye color?","");
+ var haircolor  = prompt("What is your hair color?","");
+ var height     = prompt("What is your height in inches?","");
+ var weight     = prompt("What is your weight in pounds?","");
+ var race       = prompt("What is your race?","");
+ var gender     = prompt("What is your gender?","");
+ var skincolor  = prompt("What is your skin color?","");
+ var weapon     = prompt("What is your weapon of choice?",""); 
+
+var player2 = new Character(profession,fullname,age,eyecolor,haircolor,height,weight,race,gender,skincolor,weapon); 
+
+document.write("Welcome to your final battle! Today it will be player1 vs player2<br>");
+document.write(player1.fullName + " hates " + player2.fullName + "<br>");
+document.write(player2.fullName + " starts with " + player2.Hp + " hit points<br>");
+
+while(player2.Hp > 0)
+{
+  var roll = Math.floor((Math.random() * 100) + 1);
+  if(roll <= (50 + player1.PThit))
+  {
+    player2.Hp = player2.Hp - (Math.floor((Math.random() * player1.Damage) + 1));
+    document.write("You landed a hit! Player2 has only " + player2.Hp + " remaining.<br>");
+    if(player2.Hp < 0){document.write(player2.fullName + " has lost an arm.<br>");}
+  }
+  else
+  {
+    document.write("You missed!<br>");
+  }
+}
+
+document.write("Player2 is dead with " + player2.Hp);
+
+</script>
