@@ -1,29 +1,56 @@
 <script>
+//Character generation
+//0) Although it is often assumed that you are creating a player character (PC), this library allows you to alternatively create non-player characters (NPC) as well.
+//1) First, select the race. By selecting the race, we immediately can determine limits on class choices and alignment.
+//2) Second, select the gender. This will affect pre-rolled abilities.
+//3) Third, select the class. Race and gender will affect ability generation.
+//4) Finally, alignment choices will be limited by the above attributes and will affect choice of spells, magic items allowed, etc.
 
+    //Please limit sides to 4,6,8,10,12,20,100 to model after real world gem dice
     function rollDie(numberofsides)
     {
         return Math.floor((Math.random() * parseInt(numberofsides)) + 1);
     }
 
-    function generatePropertyValue(characterClass,characterProperty)
+    function generateAbilityValue(race.toLowerCase(),gender.toLowerCase(),age,characterClass.toLowerCase(),ability.toLowerCase())
     {
         var die1, die2, die3;
         die1 = die2 = die3 = 0;
         var strength, intelligence, constitution, wisdom, dexterity, charisma;
-        strength = intelligence = constitution = wisdom = dexterity = charisma = 0;
+        strength = intelligence = constitution = wisdom = dexterity = charisma = comeliness = 0;
         var ability_min, ability_max;
 
-        //define minimum and maximum values for each ability score
-        switch (characterClass.toLowerCase())
+        //Define minimum and maximum values for each ability score before factoring in gender and race modifiers
+        switch (characterClass)
         {
-            case "warrior":
-                switch (characterProperty.toLowerCase())
+            case "assassin":
+                switch (ability)
                 {
                     case "strength":
-                        ability_min = 9;
-                        ability_max = 18;
+                        ability_min = 12;
+                        ability_max = 18; 
                         break;
                     case "intelligence":
+                        ability_min = 11;
+                        ability_max = 18;
+                        break;
+                    case "wisdom":
+                        ability_min = 3;
+                        ability_max = 18;
+                        break;
+                    case "dexterity":
+                        ability_min = 12;
+                        ability_max = 18;
+                        break;
+                    case "constitution":
+                        ability_min = 3;
+                        ability_max = 18;
+                        break;
+                    case "charisma":
+                        ability_min = 3;
+                        ability_max = 18;
+                        break;
+                    case "comeliness":
                         ability_min = 3;
                         ability_max = 18;
                         break;
@@ -33,15 +60,331 @@
                         break;
                 }
                 break;
-            case "wizard":
-                switch (characterProperty.toLowerCase())
+            case "cleric":
+                switch (ability)
                 {
                     case "strength":
                         ability_min = 3;
-                        ability_max = 11;
+                        ability_max = 18; 
                         break;
                     case "intelligence":
+                        ability_min = 3;
+                        ability_max = 18;
+                        break;
+                    case "wisdom":
+                        ability_min = 9;
+                        ability_max = 18;
+                        break;
+                    case "dexterity":
+                        ability_min = 3;
+                        ability_max = 18;
+                        break;
+                    case "constitution":
+                        ability_min = 3;
+                        ability_max = 18;
+                        break;
+                    case "charisma":
+                        ability_min = 3;
+                        ability_max = 18;
+                        break;
+                    case "comeliness":
+                        ability_min = 3;
+                        ability_max = 18;
+                        break;
+                    default: //unknown ability with no min or max value requirement
+                        ability_min = 3;
+                        ability_max = 18;
+                        break;
+                }
+                break;
+            case "druid":
+                switch (ability)
+                {
+                    case "strength":
+                        ability_min = 9;
+                        ability_max = 18; 
+                        break;
+                    case "intelligence":
+                        ability_min = 3;
+                        ability_max = 18;
+                        break;
+                    case "wisdom":
+                        ability_min = 12;
+                        ability_max = 18;
+                        break;
+                    case "dexterity":
+                        ability_min = 3;
+                        ability_max = 18;
+                        break;
+                    case "constitution":
+                        ability_min = 3;
+                        ability_max = 18;
+                        break;
+                    case "charisma":
+                        ability_min = 15;
+                        ability_max = 18;
+                        break;
+                    case "comeliness":
+                        ability_min = 3;
+                        ability_max = 18;
+                        break;
+                    default: //unknown ability with no min or max value requirement
+                        ability_min = 3;
+                        ability_max = 18;
+                        break;
+                }
+                break;
+            case "fighter":
+                switch (ability)
+                {
+                    case "strength":
+                        ability_min = 9;
+                        ability_max = 18; 
+                        break;
+                    case "intelligence":
+                        ability_min = 3;
+                        ability_max = 18;
+                        break;
+                    case "wisdom":
+                        ability_min = 3;
+                        ability_max = 18;
+                        break;
+                    case "dexterity":
+                        ability_min = 3;
+                        ability_max = 18;
+                        break;
+                    case "constitution":
+                        ability_min = 7;
+                        ability_max = 18;
+                        break;
+                    case "charisma":
+                        ability_min = 3;
+                        ability_max = 18;
+                        break;
+                    case "comeliness":
+                        ability_min = 3;
+                        ability_max = 18;
+                        break;
+                    default: //unknown ability with no min or max value requirement
+                        ability_min = 3;
+                        ability_max = 18;
+                        break;
+                }
+                break;
+            case "illusionist":
+                switch (ability)
+                {
+                    case "strength":
+                        ability_min = 3;
+                        ability_max = 18;
+                        break;
+                    case "intelligence":
+                        ability_min = 15;
+                        ability_max = 18;
+                        break;
+                    case "wisdom":
+                        ability_min = 3;
+                        ability_max = 18;
+                        break;
+                    case "dexterity":
+                        ability_min = 16;
+                        ability_max = 18;
+                        break;
+                    case "constitution":
+                        ability_min = 3;
+                        ability_max = 18;
+                        break;
+                    case "charisma":
+                        ability_min = 3;
+                        ability_max = 18;
+                        break;
+                    case "comeliness":
+                        ability_min = 3;
+                        ability_max = 18;
+                        break;
+                    default: //unknown ability with no min or max value requirement
+                        ability_min = 3;
+                        ability_max = 18;
+                        break;
+                }
+                break;
+            case "magic-user":
+                switch (ability)
+                {
+                    case "strength":
+                        ability_min = 3;
+                        ability_max = 18;
+                        break;
+                    case "intelligence":
+                        ability_min = 9;
+                        ability_max = 18;
+                        break;
+                    case "wisdom":
+                        ability_min = 3;
+                        ability_max = 18;
+                        break;
+                    case "dexterity":
+                        ability_min = 6;
+                        ability_max = 18;
+                        break;
+                    case "constitution":
+                        ability_min = 3;
+                        ability_max = 18;
+                        break;
+                    case "charisma":
+                        ability_min = 3;
+                        ability_max = 18;
+                        break;
+                    case "comeliness":
+                        ability_min = 3;
+                        ability_max = 18;
+                        break;
+                    default: //unknown ability with no min or max value requirement
+                        ability_min = 3;
+                        ability_max = 18;
+                        break;
+                }
+                break;
+            case "monk":
+                switch (ability)
+                {
+                    case "strength":
+                        ability_min = 15;
+                        ability_max = 18;
+                        break;
+                    case "intelligence":
+                        ability_min = 3;
+                        ability_max = 18;
+                        break;
+                    case "wisdom":
+                        ability_min = 15;
+                        ability_max = 18;
+                        break;
+                    case "dexterity":
+                        ability_min = 15;
+                        ability_max = 18;
+                        break;
+                    case "constitution":
                         ability_min = 11;
+                        ability_max = 18;
+                        break;
+                    case "charisma":
+                        ability_min = 3;
+                        ability_max = 18;
+                        break;
+                    case "comeliness":
+                        ability_min = 3;
+                        ability_max = 18;
+                        break;
+                    default: //unknown ability with no min or max value requirement
+                        ability_min = 3;
+                        ability_max = 18;
+                        break;
+                }
+                break;
+            case "paladin":
+                switch (ability)
+                {
+                    case "strength":
+                        ability_min = 12;
+                        ability_max = 18;
+                        break;
+                    case "intelligence":
+                        ability_min = 9;
+                        ability_max = 18;
+                        break;
+                    case "wisdom":
+                        ability_min = 13;
+                        ability_max = 18;
+                        break;
+                    case "dexterity":
+                        ability_min = 3;
+                        ability_max = 18;
+                        break;
+                    case "constitution":
+                        ability_min = 9;
+                        ability_max = 18;
+                        break;
+                    case "charisma":
+                        ability_min = 17;
+                        ability_max = 18;
+                        break;
+                    case "comeliness":
+                        ability_min = 3;
+                        ability_max = 18;
+                        break;
+                    default: //unknown ability with no min or max value requirement
+                        ability_min = 3;
+                        ability_max = 18;
+                        break;
+                }
+                break;
+            case "ranger":
+                switch (ability)
+                {
+                    case "strength":
+                        ability_min = 13;
+                        ability_max = 18;
+                        break;
+                    case "intelligence":
+                        ability_min = 3;
+                        ability_max = 18;
+                        break;
+                    case "wisdom":
+                        ability_min = 14;
+                        ability_max = 18;
+                        break;
+                    case "dexterity":
+                        ability_min = 3;
+                        ability_max = 18;
+                        break;
+                    case "constitution":
+                        ability_min = 14;
+                        ability_max = 18;
+                        break;
+                    case "charisma":
+                        ability_min = 3;
+                        ability_max = 18;
+                        break;
+                    case "comeliness":
+                        ability_min = 3;
+                        ability_max = 18;
+                        break;
+                    default: //unknown ability with no min or max value requirement
+                        ability_min = 3;
+                        ability_max = 18;
+                        break;
+                }
+                break;
+            case "thief":
+                switch (ability)
+                {
+                    case "strength":
+                        ability_min = 3;
+                        ability_max = 18;
+                        break;
+                    case "intelligence":
+                        ability_min = 3;
+                        ability_max = 18;
+                        break;
+                    case "wisdom":
+                        ability_min = 3;
+                        ability_max = 18;
+                        break;
+                    case "dexterity":
+                        ability_min = 9;
+                        ability_max = 18;
+                        break;
+                    case "constitution":
+                        ability_min = 3;
+                        ability_max = 18;
+                        break;
+                    case "charisma":
+                        ability_min = 3;
+                        ability_max = 18;
+                        break;
+                    case "comeliness":
+                        ability_min = 3;
                         ability_max = 18;
                         break;
                     default: //unknown ability with no min or max value requirement
@@ -51,13 +394,33 @@
                 }
                 break;
             default: //unknown class with no constraints
-                switch (characterProperty.toLowerCase())
+                switch (ability)
                 {
                     case "strength":
                         ability_min = 3;
                         ability_max = 18;
                         break;
                     case "intelligence":
+                        ability_min = 3;
+                        ability_max = 18;
+                        break;
+                    case "wisdom":
+                        ability_min = 3;
+                        ability_max = 18;
+                        break;
+                    case "dexterity":
+                        ability_min = 3;
+                        ability_max = 18;
+                        break;
+                    case "constitution":
+                        ability_min = 3;
+                        ability_max = 18;
+                        break;
+                    case "charisma":
+                        ability_min = 3;
+                        ability_max = 18;
+                        break;
+                    case "comeliness":
                         ability_min = 3;
                         ability_max = 18;
                         break;
@@ -69,7 +432,10 @@
                 break;
         }
 
-        //strength
+        //Reminder to add flag to allow player to choose between completely random (which could disqualify class), 
+        //or use below logic to allow character to automatically pass all in minimum requirements for a class
+        //if player chooses minimum random option to ensure choice of class, then roll until minimum abilities are met
+        var dicesum = 0;
         do
         {
             //Below simulates rolling three 6-sided dice
@@ -77,52 +443,317 @@
             die2 = rollDie(6);
             die3 = rollDie(6);
 
-            var dicesum = die1 + die2 + die3;
+            dicesum = die1 + die2 + die3;
 
             if (dicesum >= ability_min && dicesum <= ability_max)
             {
                 return dicesum;
             }
         } while (dicesum < ability_min || dicesum > ability_max); //keep rolling dice until meets minimum requirement
+
+        //Fighter exceptional strength adjustment
+        //Only fighters are permitted to roll for exceptional strength. 
+        //From a practical standpoint since this is ALL they do it makes sense to isolate this modifier to only them
+        if(characterClass=="fighter"&&dicesum==18) //reminder to make dicesum more global
+        {
+          //Roll value between 1 to 100 to determine exceptional strength
+	  var exceptionalstrength = parseFloat(rollDie(100)/1000); //we want to get a fractional value to 3 decimal places
+          dicesum = dicesum + exceptionalstrength; //e.g. 18.075
+        }
+
+        //Race and gender adjustments
+        switch (ability)
+        {
+          case "strength":
+            switch(race)
+            {
+              case "dwarf":
+                if(dicesum<8) {dicesum = 8;} //minimum for all dwarves regardless of class
+
+                if(characterClass=="fighter"&&gender=="male")
+                {
+                  if(dicesum>18.099) {dicesum=18.099;}
+                }
+                else if(gender=="female")
+                {
+                  if(dicesum>17) {dicesum=17;}
+                }
+                break;
+              case "elf":
+                if(characterClass=="fighter"&&gender=="male")
+                {
+                  if(dicesum>18.075) {dicesum = 18.075;}
+                }
+                else if(gender=="female")
+                {
+                  if(dicesum>16) {dicesum = 16;}
+                }
+                break;
+              case "gnome":
+                if(dicesum<6) {dicesum = 6;} //minimum for all gnomes regardless of class or gender
+
+                if(characterClass=="fighter"&&gender=="male")
+                {
+                  if(dicesum>18.050) {dicesum = 18.050;}
+                }
+                else if(gender=="female")
+                {
+                  if(dicesum>15) {dicesum = 15;}
+                }               
+                break;
+              case "half-elf":
+                if(characterClass=="fighter"&&gender=="male")
+                {
+                  if(dicesum>18.090) {dicesum = 18.090;}
+                }
+                else if(gender=="female")
+                {
+                  if(dicesum>17) {dicesum = 17;}
+                }
+                break;
+              case "half-orc":
+                if(dicesum<6) {dicesum = 6;} //minimum for all half-orcs regardless of class or gender
+
+                if(characterClass=="fighter"&&gender=="male")
+                {
+                  if(dicesum>18.099) {dicesum = 18.099;}
+                }
+                else if(characterClass=="fighter"&&gender=="female")
+                {
+                  if(dicesum>18.075) {dicesum = 18.075;}
+                }
+                break;
+              case "halfling":
+                if(dicesum<6) {dicesum = 6;} //minimum for all halflings regardless of class or gender
+
+                if(gender=="male")
+                {
+                  if(dicesum>17) {dicesum = 17;}
+                }
+                else if(gender=="female")
+                {
+                  if(dicesum>14) {dicesum = 14;}
+                }
+                break;
+              case "human":
+                if(characterClass=="fighter"&&gender=="female")
+                {
+                  if(dicesum>18.050) {dicesum = 18.050;}
+                }
+                break;
+              default:
+                break;
+            }            
+            break;
+          case "intelligence":
+            switch(race)
+            {
+              case "dwarf":
+                break;
+              case "elf":
+                if(dicesum<8) {dicesum = 8;} //minimum for all elves regardless of class or gender
+                break;
+              case "gnome":
+                if(dicesum<7) {dicesum = 7;} //minimum for all gnomes regardless of class or gender
+                break;
+              case "half-elf":
+                if(dicesum<4) {dicesum = 4;} //minimum for all half-elves regardless of class or gender
+                break;
+              case "half-orc":
+                if(dicesum>17) {dicesum = 17;} //maximum for all half-orcs regardless of class or gender
+                break;
+              case "halfling":
+                if(dicesum<6) {dicesum = 6;} //minimum for all halflings regardless of class or gender
+                break;
+              case "human":
+                break;
+              default:
+                break;
+            } 
+            break;
+          case "wisdom":
+            switch(race)
+            {
+              case "dwarf":
+                break;
+              case "elf":
+                break;
+              case "gnome":
+                break;
+              case "half-elf":
+                break;
+              case "half-orc":
+                if(dicesum>14) {dicesum = 14;} //maximum for all half-orcs regardless of class or gender
+                break;
+              case "halfling":
+                if(dicesum>17) {dicesum = 17;} //maximum for all halflings regardless of class or gender
+                break;
+              case "human":
+                break;
+              default:
+                break;
+            } 
+            break;
+          case "dexterity":
+            switch(race)
+            {
+              case "dwarf":
+                if(dicesum>17) {dicesum = 17;} //maximum for all dwarves regardless of class or gender
+                break;
+              case "elf":
+                if(dicesum<7) {dicesum = 7;} //minimum for all elves regardless of class or gender
+                break;
+              case "gnome":
+                break;
+              case "half-elf":
+                if(dicesum<6) {dicesum = 6;} //minimum for all half-elves regardless of class or gender
+                break;
+              case "half-orc":
+                if(dicesum>14) {dicesum = 14;} //maximum for all half-orcs regardless of class or gender
+                break;
+              case "halfling":
+                if(dicesum<8) {dicesum = 8;} //minimum for all halflings regardless of class or gender
+                break;
+              case "human":
+                break;
+              default:
+                break;
+            } 
+            break;
+          case "constitution":
+            switch(race)
+            {
+              case "dwarf":
+                if(dicesum<12) {dicesum = 12;} //minimum for all dwarves regardless of class or gender
+                break;
+              case "elf":
+                if(dicesum<6) {dicesum = 6;} //minimum for all elves regardless of class or gender
+                break;
+              case "gnome":
+                if(dicesum<8) {dicesum = 8;} //minimum for all gnomes regardless of class or gender
+                break;
+              case "half-elf":
+                if(dicesum<6) {dicesum = 6;} //minimum for all half-elves regardless of class or gender
+                break;
+              case "half-orc":
+                if(dicesum<13) {dicesum = 13;} //minimum for all half-orcs regardless of class or gender
+                break;
+              case "halfling":
+                if(dicesum<10) {dicesum = 10;} //minimum for all halflings regardless of class or gender
+                break;
+              case "human":
+                break;
+              default:
+                break;
+            } 
+            break;
+          case "charisma":
+            switch(race)
+            {
+              case "dwarf":
+                dicesum = dicesum - 2; //maximum applies only with respect to non-dwarves, else restore +2 with dwarves
+                break;
+              case "elf":
+                if(dicesum<8) {dicesum = 8;} //minimum for all elves regardless of class or gender
+                break;
+              case "gnome":
+                break;
+              case "half-elf":
+                break;
+              case "half-orc":
+                dicesum = dicesum - 6; //maximum applies only with respect to non-orcs and non-half-orcs, else restore +6 with orcs
+                break;
+              case "halfling":
+                break;
+              case "human":
+                break;
+              default:
+                break;
+            } 
+            break;
+          case "comeliness":
+            switch(race)
+            {
+              case "dwarf":
+                break;
+              case "elf":
+                break;
+              case "gnome":
+                break;
+              case "half-elf":
+                break;
+              case "half-orc":
+                break;
+              case "halfling":
+                break;
+              case "human":
+                break;
+              default:
+                break;
+            } 
+            break;
+          default:
+            break;
+        }
+
     }    
 
-    function generateCharacter(characterClass)
-    {
-      var myObject = new Object();
-      myObject.characterClass = characterClass;
+    //Player character prototype. If characterAbilities = null, then abilities will be randomly generated
+    function Character(characterAttributes,characterAbilities) {
+      //Attributes are either manually generated or can be automated
+      this.firstName        = characterAttributes.firstName;
+      this.lastName         = characterAttributes.lastName;
+      this.title            = characterAttributes.title; //usually null if player
+      this.eyeColor         = characterAttributes.eyeColor;
+      this.hairColor        = characterAttributes.hairColor;
+      this.height           = characterAttributes.height;
+      this.weight           = characterAttributes.weight;
+      this.skinColor        = characterAttributes.skinColor;
+      this.alignment        = characterAttributes.alignment;
+      this.characterType    = characterAttributes.characterType; //PC or NPC
 
-      //properties that you can set
+      //These attributes impact abilities if character abilities are randomly generated
+      this.race             = characterAttributes.race;
+      this.gender           = characterAttributes.gender;
+      this.age              = characterAttributes.age;
+      this.characterClass   = characterAttributes.characterClass;
 
-      var characterName = prompt("What is your character's name?","");
-      var hairColor = prompt("What is your hair color?","");
-      var eyeColor = prompt("What is your eye color?","");
-      var species = prompt("What is your species?","");
-      var height = prompt("What is your height?","");
-      var gender = prompt("What is your gender?","");
-      var weight = prompt("What is your weight?","");
-      var hairStyle = prompt("What is your hairstyle?","");
-
-      myObject.characterName = characterName;
-      myObject.hairColor = hairColor;
-      myObject.eyeColor = eyeColor;
-      myObject.species = species;
-      myObject.height = parseFloat(height); //convert to a float number
-      myObject.gender = gender;
-      myObject.weight = parseFloat(weight); //convert to a float number
-      myObject.hairStyle = hairStyle;
-
-      //properties that the program will set
-      myObject.strength     = generatePropertyValue(characterClass,"strength");
-      myObject.intelligence = generatePropertyValue(characterClass,"intelligence");
-      myObject.constitution = generatePropertyValue(characterClass,"constitution");
-      myObject.wisdom       = generatePropertyValue(characterClass,"wisdom");
-      myObject.dexterity    = generatePropertyValue(characterClass,"dexterity");
-      myObject.charisma     = generatePropertyValue(characterClass,"charisma"); 
-
-      console.log(myObject);
+      if(characterAbilities==null) 
+      {
+        //Abilities are randomly generated with adjustments based on attributes
+        this.strength       = generateAbilityValue(this.race,this.gender,this.age,this.characterClass,"strength");
+        this.intelligence   = generateAbilityValue(this.race,this.gender,this.age,this.characterClass,"intelligence");
+        this.wisdom         = generateAbilityValue(this.race,this.gender,this.age,this.characterClass,"wisdom");
+        this.dexterity      = generateAbilityValue(this.race,this.gender,this.age,this.characterClass,"dexterity");
+        this.constitution   = generateAbilityValue(this.race,this.gender,this.age,this.characterClass,"constitution");
+        this.charisma       = generateAbilityValue(this.race,this.gender,this.age,this.characterClass,"charisma");
+        this.comeliness     = generateAbilityValue(this.race,this.gender,this.age,this.characterClass,"comeliness");
+      }
+      else
+      {
+        this.strength       = characterAbilities.strength;
+        this.intelligence   = characterAbilities.intelligence;
+        this.wisdom         = characterAbilities.wisdom;
+        this.dexterity      = characterAbilities.dexterity;
+        this.constitution   = characterAbilities.constitution;
+        this.charisma       = characterAbilities.charisma;
+        this.comeliness     = characterAbilities.comeliness;     
+      }
     }
 
-    //create test characters. View characters using F12
-    generateCharacter("warrior");
-    generateCharacter("wizard");
+    function generateCharacter()
+    {
+      /*
+      0) Prompt if PC or NPC
+      1) First, select the race. By selecting the race, we immediately can determine limits on class choices and alignment.
+      2) Second, select the gender. This will affect pre-rolled abilities.
+      3) Third, select the class. Race and gender will affect ability generation.
+      4) Alignment choices will be limited by the above attributes and will affect choice of spells, magic items allowed, etc.
+      
+      var player1 = new Character(characterAttributes,null); //make each parameter null if you want to auto generate values
+      */
+    }
+    
+    //Call function to create a player character
+    generateCharacter();
 </script>
