@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<style>
+  .container {
+    display: flex;
+    flex-direction: row;
+    height: 300px;
+    background-color: yellow;
+  }
+
+  .box {
+    background: red;
+    color: white;
+    font-size: 60px;
+    text-align: center;
+    line-height: 200px;
+    width: 200px;
+    height: 200px;
+    margin: auto;
+  }
+
+  @media (max-width:600px) {
+    .container {
+      flex-direction: column;
+      flex: 1 21%;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="box">1</div>
+  <div class="box">2</div>
+  <div class="box">3</div>
+</div>
+</body>
+</html>

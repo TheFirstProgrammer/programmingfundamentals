@@ -1,0 +1,24 @@
+<script>
+alert("Knock! Knock!"); //An alert like a prompt, 'pauses' the program to force an action from user before continuing with code
+
+var whoisthere = prompt("Who's there?","You can choose Canoe, Merry, or Iva");
+
+alert(whoisthere + " who?");
+
+if(whoisthere=="canoe"||whoisthere=="Canoe") //An 'if' is always first
+{
+  document.write("Canoe help me with my homework?");
+}
+else if(whoisthere=="merry"||whoisthere=="Merry") //An 'else if' requires at least one 'if', but does not require an else 
+{
+  document.write("Merry Christmas!");
+}
+else if(whoisthere=="iva"||whoisthere=="Iva")
+{
+  document.write("I've a sore hand from knocking!");
+}
+else //An 'else' requires and 'if', and is always last.  Although not required, it is best practice to use it to catch unexpected responses
+{
+  document.write("Oops. No more \"knock knock\" jokes.");
+}
+</script>
